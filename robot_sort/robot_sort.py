@@ -102,9 +102,11 @@ class SortingRobot:
             self.set_light_on()
             self.move_right()
           
-            while self.compare_item() != 0: #or self.compare_item() != 0:  
+            while self.compare_item() != 0: 
+                if self._time > 10000:
+                    return
             # swap None with the item in front of the robot
-                if self.compare_item() == None:
+                if self.compare_item() == None: 
                     #self.swap_item()
                     self.set_light_on()
                     self.move_right()
@@ -146,15 +148,16 @@ class SortingRobot:
                     else:
                         if self.can_move_left():  
                             self.move_left()
-
+                else:
+                    return 0
 
                        
-            # we are here cause we hit zero or none    
+               
                 
               
                 
                 
-            # else if the held item is less than swap items and move to the right if possible
+            
            
              
 
