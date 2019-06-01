@@ -99,32 +99,53 @@ class SortingRobot:
         self.swap_item()
         if self.can_move_right():
             # robot's at 0 position so can robot move to the right?
+            self.set_light_on()
             self.move_right()
-            while self.compare_item() > 0 or self.compare_item() < 0:  
+          
+            while self.compare_item() != 0: #or self.compare_item() != 0:  
             # swap None with the item in front of the robot
-                if self.compare_item() > 0:
-                    if self.can_move_right():
-                        # robot's at 0 position so can robot move to the right?
-                        self.move_right()
-                    # no right means we are at the end of the list
-                    elif self.can_move_left():
-                        self.swap_item()
-                        self.move_left()
+                if self.compare_item() == None:
+                    #self.swap_item()
+                    self.set_light_on()
+                    self.move_right()
+                    self.swap_item()   
+                if self.compare_item() == 1:
+                    if self.light_is_on():
+                        if self.can_move_right():
+                            # robot's at 0 position so can robot move to the right?
+                            self.move_right()
+                        # no right means we are at the end of the list
+                        elif self.can_move_left():
+                            self.set_light_off()
+                            self.swap_item()
+                            self.move_left()
+                        else:
+                            self.set_light_on()
+                            self.swap_item()
+                            #return None
                     else:
-                        return 0
+                        if self.can_move_left():  
+                            self.swap_item()
+                            self.move_left()
                 # if the item we have is less than item swap them
-                elif self.compare_item() < 0:
-                    self.swap_item()
+                elif self.compare_item() == -1:
+                    #self.swap_item()
                     # continue to the right if we can
-                    if self.can_move_right():    
-                        self.move_right()
-                    # we are at the end of the list
-                    elif self.can_move_left():
-                        self.swap_item()
-                        self.move_left()
+                    if self.light_is_on():
+                        if self.can_move_right():    
+                            self.swap_item()
+                            self.move_right()
+                        # we are at the end of the list
+                        elif self.can_move_left():
+                            self.set_light_off()
+                            #self.swap_item()
+                            self.move_left()
+                        else:
+                            self.set_light_on()
+                            #return None
                     else:
-                        return 0
-
+                        if self.can_move_left():  
+                            self.move_left()
 
 
                        
