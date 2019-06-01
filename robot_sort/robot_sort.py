@@ -96,8 +96,48 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+        self.swap_item()
+        if self.can_move_right():
+            # robot's at 0 position so can robot move to the right?
+            self.move_right()
+            while self.compare_item() > 0 or self.compare_item() < 0:  
+            # swap None with the item in front of the robot
+                if self.compare_item() > 0:
+                    if self.can_move_right():
+                        # robot's at 0 position so can robot move to the right?
+                        self.move_right()
+                    # no right means we are at the end of the list
+                    elif self.can_move_left():
+                        self.swap_item()
+                        self.move_left()
+                    else:
+                        return 0
+                # if the item we have is less than item swap them
+                elif self.compare_item() < 0:
+                    self.swap_item()
+                    # continue to the right if we can
+                    if self.can_move_right():    
+                        self.move_right()
+                    # we are at the end of the list
+                    elif self.can_move_left():
+                        self.swap_item()
+                        self.move_left()
+                    else:
+                        return 0
+
+
+
+                       
+            # we are here cause we hit zero or none    
+                
+              
+                
+                
+            # else if the held item is less than swap items and move to the right if possible
+           
+             
+
+        # 
 
 
 if __name__ == "__main__":
@@ -106,6 +146,7 @@ if __name__ == "__main__":
 
     l = [15, 41, 58, 49, 26, 4, 28, 8, 61, 60, 65, 21, 78, 14, 35, 90, 54, 5, 0, 87, 82, 96, 43, 92, 62, 97, 69, 94, 99, 93, 76, 47, 2, 88, 51, 40, 95, 6, 23, 81, 30, 19, 25, 91, 18, 68, 71, 9, 66, 1, 45, 33, 3, 72, 16, 85, 27, 59, 64, 39, 32, 24, 38, 84, 44, 80, 11, 73, 42, 20, 10, 29, 22, 98, 17, 48, 52, 67, 53, 74, 77, 37, 63, 31, 7, 75, 36, 89, 70, 34, 79, 83, 13, 57, 86, 12, 56, 50, 55, 46]
 
+    
     robot = SortingRobot(l)
 
     robot.sort()
